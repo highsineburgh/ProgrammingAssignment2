@@ -1,5 +1,5 @@
-## Function contining a list of functions to cache and retreive matrices and their inverse squares. Assumes the matrix
-## being passed is invertible. 
+## Provides functions to cache and retrieve matrices and their inverse squares. Assumes the matrix being passed 
+## is invertible. 
 ## Usage: 
 ## >x <- matrix(c(2,1,1,2), nrow=2, ncol=2)
 ## >y <- makeCacheMatrix(x)
@@ -13,14 +13,20 @@
 ## [1,]  0.6666667 -0.3333333
 ## [2,] -0.3333333  0.6666667
 
+## Create a list of functions to cache and retreive matrices and their inverse squares. 
 makeCacheMatrix <- function(x = matrix()) {
+  ## Initialize the inverse to null
   invX <- NULL
+  ## cache the matrix
   set <- function(y) {
     x <<- y
     invX <<- NULL
   }
+  ## retrieve a cached matrix
   get <- function() x
+  ## store a solved inverse square of the matrix
   setInverse <- function(solve) invX <<- solve
+  ## retrieve the inverse square
   getInverse <- function() invX
   list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 }
